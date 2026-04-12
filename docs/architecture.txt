@@ -1,0 +1,36 @@
+=== Cybersecurity Home Lab Architecture ===
+
+Host System:
+- OS: EndeavourOS Linux (Arch-based)
+- Desktop: KDE Plasma
+- Virtualization: VMware Workstation Pro 17.6.4
+- Hardware: AMD Ryzen 7 9800X3D, 64GB DDR5
+
+Network Configuration:
+- Type: NAT (VMnet8)
+- Subnet: 192.168.161.0/24
+- Gateway: 192.168.161.2
+- DHCP Range: .128-.254
+
+Virtual Machines:
+┌─────────────────────────────────────────┐
+│ VM Name          │ IP            │ Role │
+├─────────────────────────────────────────┤
+│ Kali Linux       │ .128          │ Attacker Platform │
+│ Metasploitable 2 │ .129          │ Vulnerable Target │
+│ WIN10-PC1        │ .130          │ Domain Client     │
+│ WIN10-PC2        │ .132          │ Domain Client     │
+│ WIN10-PC3        │ .133          │ Domain Client     │
+│ Security Onion   │ .20 (Paused)  │ SIEM/IDS         │
+└─────────────────────────────────────────┘
+
+VM Specifications:
+- Kali: 4GB RAM, 2 cores, 80GB disk
+- Metasploitable: 512MB RAM, 1 core, 8GB disk
+- Windows: 4GB RAM, 2 cores, 40GB disk each
+- Security Onion: 8GB RAM, 4 cores, 200GB disk
+
+Security Configurations:
+- Kali OPSEC: MAC spoofing, Tor, history disabled, UTC timezone
+- Network isolation via NAT
+- Snapshot capability for reset/recovery
