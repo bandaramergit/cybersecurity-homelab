@@ -1,0 +1,53 @@
+=== Scenario 2: Windows Network Enumeration ===
+Date: 2026-04-06
+Objective: Enumerate Windows 10 clients and discover network shares
+
+Target Information:
+- WIN10-PC1: 192.168.161.130
+- WIN10-PC2: 192.168.161.132
+- WIN10-PC3: 192.168.161.133
+- Workgroup: LAB
+
+Attack Platform:
+- IP: 192.168.161.128
+- OS: Kali Linux
+- Tools: nmap, enum4linux, smbclient, crackmapexec
+
+Phase 1: Service Discovery
+[نكمل هنا]
+
+Phase 2: SMB Exploitation
+- Accessed share: //192.168.161.130/Share
+- Credentials: Admin/P@ssw0rd
+- Permissions: Full Control
+- Activities:
+  • Directory listing
+  • File upload test
+- Screenshot: 12
+
+
+
+=== Summary ===
+Status: ✅ SUCCESS
+
+Findings:
+1. Windows Firewall blocking ports initially
+2. SMB shares accessible with credentials
+3. Full control permissions granted
+4. File upload successful
+
+Security Issues:
+- Weak password (P@ssw0rd)
+- Everyone has Full Control
+- No SMB signing enforced
+- Guest access enabled
+
+Recommendations:
+- Strong password policy
+- Least privilege permissions
+- Enable SMB signing
+- Disable unnecessary shares
+- Monitor file access logs
+
+Completion Time: ~20 minutes
+Screenshots: 7-12

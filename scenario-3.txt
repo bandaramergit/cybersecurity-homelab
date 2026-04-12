@@ -1,0 +1,44 @@
+=== Scenario 3: Network Traffic Analysis ===
+Date: 2026-04-06
+Objective: Capture and analyze attack traffic to identify signatures
+
+Setup:
+- Capture Interface: eth0 (Kali)
+- Tool: Wireshark
+- Scenario: Re-exploit Metasploitable while capturing
+
+Phase 1: Traffic Capture Setup
+[نكمل هنا]
+
+
+Phase 2: Traffic Analysis
+- Total Packets Captured: [عدد الـ packets]
+- FTP Traffic: Identified vsftpd communication
+- Backdoor Connection: Port 6200 detected
+- Attack Signatures Found:
+  • FTP USER command with malicious payload
+  • Reverse shell connection established
+  • Root-level commands executed
+
+Key Findings:
+1. Attack completely visible in plaintext
+2. No encryption on FTP connection
+3. Backdoor trigger easily identifiable
+4. Network monitoring would detect this instantly
+
+=== Summary ===
+Status: ✅ SUCCESS
+
+Tools Used:
+- Wireshark
+- Display Filters (ftp, tcp.port)
+- TCP Stream Analysis
+
+Security Insights:
+- Unencrypted protocols expose attacks
+- IDS signatures can detect this pattern
+- Network monitoring is essential
+
+PCAP File: metasploitable-exploit.pcap
+Screenshots: 13-17
+Completion Time: ~15 minutes
