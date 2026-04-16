@@ -192,7 +192,7 @@ This project is for educational purposes only. Do not use these techniques on sy
 ## 🤝 Connect
 
 **LinkedIn:** [https://www.linkedin.com/in/bandar-amer/]
-**GitHub:** [(https://github.com/bandaramergit)]
+**GitHub:** [https://github.com/bandaramergit]
 **Portfolio:** [soon]
 
 ---
