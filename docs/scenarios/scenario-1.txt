@@ -62,4 +62,3 @@ Recommendations:
 - Monitor FTP service logs
 - Disable unnecessary services
 
-Completion Time: ~15 minutes
