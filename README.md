@@ -206,7 +206,6 @@ This lab supports preparation for:
 - **Screenshots:** 30+
 - **Documentation Pages:** 5
 - **PCAP Files:** 1
-- **Time Investment:** ~6 hours
 
 ## 🚀 Future Enhancements
 
