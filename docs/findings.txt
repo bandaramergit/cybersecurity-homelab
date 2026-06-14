@@ -151,4 +151,3 @@ Date: 2026-06-12
 Total Scenarios: 2
 Success Rate: 100%
 Detection Rate: 0%
-Time Investment: ~2 hours
