@@ -129,3 +129,26 @@ Skills demonstrated align with:
 - SOC Analyst Level 1
 - Junior Penetration Tester
 - Security Operations roles
+
+
+
+
+=== Phase 2 - Security Findings ===
+Date: 2026-06-12
+
+[CRITICAL] Kerberoasting - Weak Service Account Password
+- Account: sqlsvc
+- SPN: MSSQLSvc/dc01.lab.local:1433
+- Impact: Password cracked in seconds
+- Recommendation: Use 25+ character passwords for service accounts
+
+[CRITICAL] Pass-the-Hash - NTLM Hash Reuse
+- Account: Administrator
+- Impact: Full domain compromise without knowing password
+- Recommendation: Enable Protected Users Group and Credential Guard
+
+=== STATISTICS - Phase 2 ===
+Total Scenarios: 2
+Success Rate: 100%
+Detection Rate: 0%
+Time Investment: ~2 hours
