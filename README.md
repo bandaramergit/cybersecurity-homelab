@@ -26,6 +26,7 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 | WIN10-PC2 | Windows 10 Pro | Domain Client | .132 | 4GB RAM, 2 cores |
 | WIN10-PC3 | Windows 10 Pro | Domain Client | .133 | 4GB RAM, 2 cores |
 | Security Onion | Ubuntu-based | SIEM/IDS | .20 | 8GB RAM, 4 cores |
+| DC01 | Windows Server 2022 | Domain Controller | .10 | 4GB RAM, 2 cores |
 
 ## 🎯 Scenarios Completed
 
