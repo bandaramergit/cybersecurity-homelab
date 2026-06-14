@@ -49,5 +49,4 @@ Recommendations:
 - Disable unnecessary shares
 - Monitor file access logs
 
-Completion Time: ~20 minutes
 Screenshots: 7-12
