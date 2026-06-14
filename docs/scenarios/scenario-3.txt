@@ -41,4 +41,3 @@ Security Insights:
 
 PCAP File: metasploitable-exploit.pcap
 Screenshots: 13-17
-Completion Time: ~15 minutes
