@@ -34,3 +34,29 @@ Security Configurations:
 - Kali OPSEC: MAC spoofing, Tor, history disabled, UTC timezone
 - Network isolation via NAT
 - Snapshot capability for reset/recovery
+
+
+
+
+=== Phase 2 Architecture ===
+
+Domain: lab.local
+Domain Controller: DC01 (192.168.161.10)
+Windows Server 2022 Standard Evaluation
+
+Domain Users:
+- Administrator (Domain Admin)
+- jsmith (John Smith) - standard user
+- sjones (Sarah Jones) - standard user
+- mbrown (Mike Brown) - standard user
+- sqlsvc (SQL Service) - service account with SPN
+
+Domain Computers:
+- DC01 (192.168.161.10) - Domain Controller
+- WIN10-PC1 (192.168.161.130) - Domain Client
+- WIN10-PC2 (192.168.161.132) - Domain Client
+- WIN10-PC3 (192.168.161.133) - Domain Client
+
+Scenarios Completed:
+- Scenario 4: Kerberoasting
+- Scenario 5: Pass-the-Hash
