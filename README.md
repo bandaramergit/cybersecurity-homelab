@@ -84,6 +84,37 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 ![Wireshark Analysis](screenshots/network-analysis/17-tcp-stream.png)
 
 ## 🛠️ Skills Demonstrated
+---
+
+### 4. Kerberoasting Attack
+**Objective:** Extract and crack Kerberos service tickets from Active Directory
+
+**Attack Chain:**
+- Setup: Created service account (sqlsvc) with SPN
+- Ticket Extraction: `impacket-GetUserSPNs` to request Kerberos tickets
+- Password Cracking: Hashcat with rockyou.txt wordlist
+
+**Result:** ✅ Password cracked — `Password@123`
+
+**Tools:** impacket-GetUserSPNs, hashcat
+
+[📄 Full Documentation](docs/scenarios/scenario-4.txt)
+
+---
+
+### 5. Pass-the-Hash Attack
+**Objective:** Authenticate to Domain Controller using NTLM hash
+
+**Attack Chain:**
+- Hash Extraction: `impacket-secretsdump` dumped all domain hashes
+- Authentication: `crackmapexec` used hash without knowing password
+
+**Result:** ✅ Pwn3d! — Full domain compromise
+
+**Tools:** impacket-secretsdump, crackmapexec
+
+[📄 Full Documentation](docs/scenarios/scenario-5.txt)
+
 
 **Offensive Security:**
 - Network reconnaissance and enumeration
@@ -169,18 +200,17 @@ This lab supports preparation for:
 
 ## 📊 Statistics
 
-- **VMs Deployed:** 6
-- **Scenarios Completed:** 3
+- **VMs Deployed:** 7
+- **Scenarios Completed:** 5
 - **Systems Compromised:** 2/2 targets (100%)
-- **Screenshots:** 18
+- **Screenshots:** 30+
 - **Documentation Pages:** 5
 - **PCAP Files:** 1
-- **Time Investment:** ~2 hours
+- **Time Investment:** ~6 hours
 
 ## 🚀 Future Enhancements
 
 - [ ] Complete Security Onion SIEM deployment
-- [ ] Windows Server 2022 (Active Directory)
 - [ ] Additional attack scenarios (privilege escalation, persistence)
 - [ ] Blue team exercises (incident response, forensics)
 - [ ] Automated attack scripts
