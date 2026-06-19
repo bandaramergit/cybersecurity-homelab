@@ -151,3 +151,30 @@ Date: 2026-06-12
 Total Scenarios: 2
 Success Rate: 100%
 Detection Rate: 0%
+
+
+
+
+=== TROUBLESHOOTING: SECURITY ONION DEPLOYMENT ===
+
+Issue: Web UI failed to load after initial Security Onion installation. 
+Connection timeouts across multiple services (elastalert, playbook, kibana, nginx).
+
+Root Cause Analysis:
+- Initial diagnosis showed individual services failing independently
+- Deep investigation traced the issue to Salt configuration management
+- Wrong IP address (network address instead of host IP) was registered 
+  during initial setup in core pillar configuration
+- This caused every dependent service to misconfigure on each Salt state run
+
+Resolution:
+- Identified affected file: securityonion_eval.sls
+- Corrected IP address in Salt pillar configuration
+- Triggered state.highstate to propagate fix across all services
+- Verified all services returned to operational status
+
+Skills Demonstrated:
+- Systematic troubleshooting methodology
+- Configuration management (Salt/SaltStack)
+- Root cause analysis beyond surface-level symptoms
+- Linux service debugging (Docker container logs analysis)
