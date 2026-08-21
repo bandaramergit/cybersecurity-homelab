@@ -1,0 +1,54 @@
+=== Scenario 6: SIEM Deployment & Attack Detection ===
+Date: 2026-08-21
+Objective: Deploy Splunk as centralized SIEM, forward Windows Event Logs from all domain machines, and build detection rules for Kerberoasting and Pass-the-Hash attacks.
+
+Lab Environment:
+- Splunk Enterprise (Free License) on EndeavourOS host
+- Splunk Universal Forwarder on DC01, WIN10-PC1, WIN10-PC2, WIN10-PC3
+- Attack platform: Kali Linux
+
+Phase 1: SIEM Deployment
+- Installed Splunk Enterprise and enabled receiving on port 9997
+- Deployed Splunk Universal Forwarder on all 4 Windows machines
+- Configured Windows Event Log forwarding (Security, System, Application)
+- Verified connectivity from all machines to Splunk indexer
+
+Phase 2: Kerberoasting Detection
+- Executed Kerberoasting attack from Kali using impacket-GetUserSPNs
+- Target: sqlsvc service account (SPN: MSSQLSvc/dc01.lab.local:1433)
+- Splunk detected attack via Event ID 4769 (Kerberos Service Ticket Request)
+- Built detection rule: Kerberoasting Detection — Event ID 4769
+- Key indicator: Multiple ticket requests for service accounts from unexpected source
+
+Phase 3: Pass-the-Hash Detection
+- Executed secretsdump to extract all domain NTLM hashes
+- Executed Pass-the-Hash using crackmapexec with Administrator hash
+- Result: Pwn3d! — Full domain compromise confirmed
+- Splunk detected attack via Event ID 4624 (Logon Type 3, NTLM authentication)
+- Built detection rule: Pass-the-Hash Detection — Event ID 4624
+- Key indicator: Administrator NTLM logon from non-domain IP (192.168.161.128)
+
+Phase 4: SOC Dashboard
+- Built SOC Detection Dashboard with 3 panels:
+  1. Kerberoasting Detection (Event ID 4769)
+  2. Pass-the-Hash Detection (Event ID 4624)
+  3. Security Events Last 24h counter
+
+=== Summary ===
+Status: SUCCESS
+- Splunk SIEM deployed and operational across full lab environment
+- Kerberoasting detected via Event ID 4769
+- Pass-the-Hash detected via Event ID 4624 and 4648
+- SOC Dashboard built with real-time detection capability
+
+Key Findings:
+1. Both attacks generate detectable Windows Event Log entries
+2. SIEM correlation enables real-time attack detection
+3. Kerberoasting leaves traces even without network monitoring
+4. Pass-the-Hash produces NTLM Logon Type 3 events from attack IP
+
+Recommendations:
+- Monitor Event ID 4769 for unusual service ticket requests
+- Alert on NTLM Logon Type 3 from non-domain IP addresses
+- Enable Advanced Audit Policy for comprehensive logging
+- Implement Splunk alerts for automated detection
