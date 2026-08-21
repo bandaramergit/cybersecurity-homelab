@@ -13,16 +13,16 @@ Network Configuration:
 - DHCP Range: .128-.254
 
 Virtual Machines:
-┌─────────────────────────────────────────┐
-│ VM Name          │ IP            │ Role │
-├─────────────────────────────────────────┤
+┌──────────────────────────────────────────────────────┐
+│ VM Name          │ IP            │ Role              │
+├──────────────────────────────────────────────────────┤
 │ Kali Linux       │ .128          │ Attacker Platform │
 │ Metasploitable 2 │ .129          │ Vulnerable Target │
 │ WIN10-PC1        │ .130          │ Domain Client     │
 │ WIN10-PC2        │ .132          │ Domain Client     │
 │ WIN10-PC3        │ .133          │ Domain Client     │
-│ Security Onion   │ .20 (Paused)  │ SIEM/IDS         │
-└─────────────────────────────────────────┘
+│ Security Onion   │ .20 (Paused)  │ SIEM/IDS          │
+└──────────────────────────────────────────────────────┘
 
 VM Specifications:
 - Kali: 4GB RAM, 2 cores, 80GB disk
