@@ -60,3 +60,26 @@ Domain Computers:
 Scenarios Completed:
 - Scenario 4: Kerberoasting
 - Scenario 5: Pass-the-Hash
+
+=== Phase 3 - SIEM Architecture ===
+
+SIEM Platform:
+- Splunk Enterprise (Free License)
+- Receiving Port: 9997
+
+Data Sources (Splunk Universal Forwarder):
+- DC01 (192.168.161.10) — Security, System, Application logs
+- WIN10-PC1 (192.168.161.130) — Security, System, Application logs
+- WIN10-PC2 (192.168.161.132) — Security, System, Application logs
+- WIN10-PC3 (192.168.161.133) — Security, System, Application logs
+
+Detection Rules:
+- Kerberoasting Detection (Event ID 4769)
+- Pass-the-Hash Detection (Event ID 4624, Logon Type 3, NTLM)
+
+Dashboard:
+- SOC Detection Dashboard — AD Attacks
+- Panels: Kerberoasting Detection, Pass-the-Hash Detection, Security Events Last 24h
+
+Scenarios Completed:
+- Scenario 6: SIEM Deployment & Attack Detection
