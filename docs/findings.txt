@@ -1,6 +1,6 @@
 === Cybersecurity Lab - Security Findings Report ===
 Date: 2026-04-06
-Analyst: [Bandar Amer]
+Analyst: Bandar Amer
 
 Executive Summary:
 Conducted comprehensive security assessment of virtualized environment including penetration testing, network enumeration, and traffic analysis. Successfully identified and exploited multiple vulnerabilities demonstrating real-world attack scenarios.
@@ -105,16 +105,16 @@ PCAP Files: 1
 
 === FUTURE IMPROVEMENTS ===
 
-1. Complete Security Onion deployment for full SIEM capability
-2. Add Windows Server for Active Directory testing
-3. Implement additional attack scenarios:
+1. Implement additional attack scenarios:
    - Privilege escalation
    - Lateral movement
    - Persistence mechanisms
-4. Blue team exercises:
+2. Blue team exercises:
    - Incident response
    - Forensic analysis
    - Threat hunting
+3. Advanced threat hunting scenarios
+4. Automated detection scripts
 
 === CERTIFICATION READINESS ===
 
@@ -131,50 +131,25 @@ Skills demonstrated align with:
 - Security Operations roles
 
 
+=== Phase 3 - Security Findings ===
+Date: 2026-08-21
 
-
-=== Phase 2 - Security Findings ===
-Date: 2026-06-12
-
-[CRITICAL] Kerberoasting - Weak Service Account Password
+[CRITICAL] Kerberoasting — Service Account Ticket Extraction
 - Account: sqlsvc
 - SPN: MSSQLSvc/dc01.lab.local:1433
-- Impact: Password cracked in seconds
-- Recommendation: Use 25+ character passwords for service accounts
+- Detection: Event ID 4769 in Splunk SIEM
+- Impact: Service account password crackable offline
+- Recommendation: Use 25+ character passwords, enable AES encryption
 
-[CRITICAL] Pass-the-Hash - NTLM Hash Reuse
+[CRITICAL] Pass-the-Hash — NTLM Hash Reuse
 - Account: Administrator
+- Detection: Event ID 4624 (Logon Type 3, NTLM) in Splunk SIEM
 - Impact: Full domain compromise without knowing password
-- Recommendation: Enable Protected Users Group and Credential Guard
+- Recommendation: Enable Protected Users Group, Credential Guard
 
-=== STATISTICS - Phase 2 ===
-Total Scenarios: 2
+=== STATISTICS - Phase 3 ===
+Total Scenarios: 1 (SIEM + 2 attack detections)
 Success Rate: 100%
-Detection Rate: 0%
-
-
-
-
-=== TROUBLESHOOTING: SECURITY ONION DEPLOYMENT ===
-
-Issue: Web UI failed to load after initial Security Onion installation. 
-Connection timeouts across multiple services (elastalert, playbook, kibana, nginx).
-
-Root Cause Analysis:
-- Initial diagnosis showed individual services failing independently
-- Deep investigation traced the issue to Salt configuration management
-- Wrong IP address (network address instead of host IP) was registered 
-  during initial setup in core pillar configuration
-- This caused every dependent service to misconfigure on each Salt state run
-
-Resolution:
-- Identified affected file: securityonion_eval.sls
-- Corrected IP address in Salt pillar configuration
-- Triggered state.highstate to propagate fix across all services
-- Verified all services returned to operational status
-
-Skills Demonstrated:
-- Systematic troubleshooting methodology
-- Configuration management (Salt/SaltStack)
-- Root cause analysis beyond surface-level symptoms
-- Linux service debugging (Docker container logs analysis)
+Detection Rate: 100%
+Machines Connected to SIEM: 4 (DC01, WIN10-PC1, WIN10-PC2, WIN10-PC3)
+Detection Rules Built: 2
