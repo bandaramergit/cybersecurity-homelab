@@ -116,6 +116,22 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-5.txt)
 
+---
+
+### 6. SIEM Deployment & Attack Detection
+**Objective:** Deploy Splunk SIEM and detect AD attacks in real-time
+
+**Attack Chain:**
+- SIEM Setup: Splunk Universal Forwarder on all domain machines
+- Detection: Kerberoasting via Event ID 4769
+- Detection: Pass-the-Hash via Event ID 4624 (Logon Type 3, NTLM)
+- Dashboard: SOC Detection Dashboard with real-time alerts
+
+**Result:** ✅ Both attacks detected — 100% detection rate
+
+**Tools:** Splunk Enterprise, Splunk Universal Forwarder, impacket, crackmapexec
+
+[📄 Full Documentation](docs/scenarios/scenario-6.txt)
 
 **Offensive Security:**
 - Network reconnaissance and enumeration
@@ -166,6 +182,9 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 - [Scenario 1: Metasploitable](docs/scenarios/scenario-1.txt)
 - [Scenario 2: Windows SMB](docs/scenarios/scenario-2.txt)
 - [Scenario 3: Traffic Analysis](docs/scenarios/scenario-3.txt)
+- [Scenario 4: Kerberoasting](docs/scenarios/scenario-4.txt)
+- [Scenario 5: Pass-the-Hash](docs/scenarios/scenario-5.txt)
+- [Scenario 6: SIEM Detection](docs/scenarios/scenario-6.txt)
 
 ## 🎓 Certification Preparation
 
@@ -194,6 +213,8 @@ This lab supports preparation for:
 - Wireshark
 - Security Onion
 - tcpdump
+- Splunk Enterprise (SIEM)
+- Splunk Universal Forwarder
 
 **Infrastructure:**
 - VMware Workstation Pro 17.6.4
@@ -202,15 +223,14 @@ This lab supports preparation for:
 ## 📊 Statistics
 
 - **VMs Deployed:** 7
-- **Scenarios Completed:** 5
+- **Scenarios Completed:** 6
 - **Systems Compromised:** 2/2 targets (100%)
-- **Screenshots:** 30+
-- **Documentation Pages:** 5
+- **Screenshots:** 37
+- **Documentation Pages:** 7
 - **PCAP Files:** 1
 
 ## 🚀 Future Enhancements
 
-- [ ] Complete Security Onion SIEM deployment
 - [ ] Additional attack scenarios (privilege escalation, persistence)
 - [ ] Blue team exercises (incident response, forensics)
 - [ ] Automated attack scripts
