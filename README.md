@@ -44,7 +44,7 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-1.txt)
 
-![Exploitation Success](screenshots/exploitation/Screenshot_20260410_131505.png)
+![Exploitation Success](screenshots/03-exploitation/02-exploit-configured.png)
 
 ---
 
@@ -63,7 +63,7 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-2.txt)
 
-![SMB Access](screenshots/exploitation/Screenshot_20260410_144151.png)
+![SMB Access](screenshots/03-exploitation/06-smb-authenticated.png)
 
 ---
 
@@ -82,7 +82,7 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-3.txt)
 
-![Wireshark Analysis](screenshots/network-analysis/17-tcp-stream.png)
+![Wireshark Analysis](screenshots/05-Network-analysis/04-tcp-stream.png)
 
 ## 🛠️ Skills Demonstrated
 ---
@@ -101,6 +101,8 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-4.txt)
 
+![Kerberoasting](screenshots/08-kerberoasting/03-password-cracked.png)
+
 ---
 
 ### 5. Pass-the-Hash Attack
@@ -115,6 +117,8 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 **Tools:** impacket-secretsdump, crackmapexec
 
 [📄 Full Documentation](docs/scenarios/scenario-5.txt)
+
+![Pass-the-Hash](screenshots/09-pass-the-hash/02-pth-success.png)
 
 ---
 
@@ -132,6 +136,8 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 **Tools:** Splunk Enterprise, Splunk Universal Forwarder, impacket, crackmapexec
 
 [📄 Full Documentation](docs/scenarios/scenario-6.txt)
+
+![SIEM Detection](screenshots/10-splunk-siem/10-splunk-dashboard-live-data.png)
 
 ---
 
@@ -151,6 +157,8 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-7.txt)
 [📄 IR Playbook](docs/ir-playbook.txt)
+
+![IR Forensics](screenshots/12-phase4-ir/09-ir-wireshark-ntlm-capture.png)
 
 ---
 
