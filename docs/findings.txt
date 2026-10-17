@@ -153,3 +153,41 @@ Success Rate: 100%
 Detection Rate: 100%
 Machines Connected to SIEM: 4 (DC01, WIN10-PC1, WIN10-PC2, WIN10-PC3)
 Detection Rules Built: 2
+
+=== Phase 4 - Incident Response & Network Forensics ===
+Date: 2026-10-16
+
+[CRITICAL] Full Domain Compromise — Kerberoasting + Pass-the-Hash
+- Attack Source: 192.168.161.128 (Kali Linux)
+- Target: DC01 (192.168.161.10) — lab.local Domain Controller
+- Detection: Splunk Event ID 4769 + 4624 + Wireshark NTLMSSP analysis
+- Impact: All domain credentials exposed, full administrative access achieved
+
+Attack Timeline:
+- 14:15 — Kerberoasting: sqlsvc ticket extracted from DC01
+- 14:21 — secretsdump: All domain NTLM hashes dumped
+- 14:25 — Pass-the-Hash: Full domain compromise (Pwn3d!)
+
+Forensic Evidence:
+- Splunk: Event ID 4769 (Kerberoasting) + 4624 (Pass-the-Hash)
+- Wireshark: NTLMSSP_NEGOTIATE + NTLMSSP_AUTH from 192.168.161.128
+- PCAP: phase4-ir-capture.pcap
+
+Recommendations:
+- Implement gMSA for service accounts
+- Enable AES encryption, disable RC4
+- Enable Protected Users Security Group
+- Enable Credential Guard
+- Disable NTLM where possible
+
+=== FUTURE IMPROVEMENTS ===
+1. Advanced threat hunting scenarios
+2. Automated IR scripts
+3. Purple Team exercises
+
+=== STATISTICS - Phase 4 ===
+Total Scenarios: 1 (Full IR Simulation)
+Detection Rate: 100%
+Evidence Collected: Splunk logs + Wireshark PCAP
+IR Documents: scenario-7.txt + ir-playbook.txt
+MITRE ATT&CK: T1558.003, T1003.002, T1550.002
