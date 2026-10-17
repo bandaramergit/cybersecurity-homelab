@@ -17,7 +17,10 @@ Phase 1: Reconnaissance
 - Result: Identified vsftpd 2.3.4 on port 21 (known vulnerable)
 
 Phase 2: Exploitation
-[سنكمل هنا]
+- Exploit: exploit/unix/ftp/vsftpd_234_backdoor
+- Target: 192.168.161.129:21
+- Result: ✅ Command shell session opened
+- Screenshot: 04-exploitation-success.png
 
 "Phase 1: Reconnaissance":
 - Network scan completed
