@@ -83,3 +83,26 @@ Dashboard:
 
 Scenarios Completed:
 - Scenario 6: SIEM Deployment & Attack Detection
+
+=== Phase 4 - Incident Response Architecture ===
+
+IR Simulation:
+- Attack Platform: Kali Linux (192.168.161.128)
+- Target: DC01 (192.168.161.10) — Windows Server 2022
+- Endpoint: WIN10-PC1 (192.168.161.130)
+
+Tools Used:
+- Splunk Enterprise — Log analysis and threat detection
+- Wireshark — Network packet capture and NTLM analysis
+- impacket-GetUserSPNs — Kerberoasting simulation
+- impacket-secretsdump — Credential dumping simulation
+- crackmapexec — Pass-the-Hash simulation
+
+Evidence Collected:
+- Splunk logs: Event ID 4769, 4624, 4648, 4688
+- Wireshark PCAP: phase4-ir-capture.pcap
+- IR Report: docs/scenarios/scenario-7.txt
+- IR Playbook: docs/ir-playbook.txt
+
+Scenarios Completed:
+- Scenario 7: Incident Response & Network Forensics
