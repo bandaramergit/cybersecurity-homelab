@@ -1,1 +1,119 @@
+=== Incident Response Playbook ===
+=== Active Directory Compromise — Kerberoasting & Pass-the-Hash ===
+Version: 1.0
+Date: 2026-10-16
+Author: Bandar Amer
 
+=== PHASE 1: DETECTION ===
+
+Indicators of Compromise (IOCs):
+
+Kerberoasting:
+- Event ID 4769 — Multiple Kerberos ticket requests for service accounts
+- Requests from unexpected IP addresses (non-domain systems)
+- RC4 encryption type (0x17) in ticket requests
+- Splunk Query:
+  index=main EventCode=4769 Service_Name="sqlsvc"
+  | stats count by Account_Name, Service_Name, Client_Address
+
+Pass-the-Hash:
+- Event ID 4624 — NTLM Logon Type 3 from unexpected source
+- No Workstation_Name in logon event
+- ANONYMOUS LOGON followed by Administrator login from same IP
+- Splunk Query:
+  index=main EventCode=4624 Logon_Type=3
+  | search Authentication_Package="NTLM"
+  | stats count by Account_Name, Source_Network_Address
+
+Network Indicators (Wireshark):
+- NTLMSSP_NEGOTIATE from non-domain IP to DC
+- NTLMSSP_AUTH with domain admin credentials from unexpected source
+- Filter: ntlmssp
+
+=== PHASE 2: TRIAGE ===
+
+Step 1: Confirm the attack
+- Verify Event ID 4769 with sqlsvc or other service accounts
+- Confirm source IP is not a legitimate domain system
+- Check if hash was cracked (look for subsequent logons)
+
+Step 2: Determine scope
+- Which accounts were targeted?
+- Which systems were accessed?
+- Was Domain Admin achieved?
+- How long has the attacker been in the network?
+
+Step 3: Assign severity
+- Kerberoasting only = HIGH
+- Kerberoasting + credential dump = CRITICAL
+- Full domain compromise = CRITICAL
+
+=== PHASE 3: CONTAINMENT ===
+
+Immediate Actions (within 1 hour):
+1. Isolate attacker IP from network (firewall rule)
+2. Disable compromised accounts temporarily
+3. Block SMB (port 445) from non-domain systems
+4. Preserve all logs — do NOT clear Event Logs
+
+Short-term Actions (within 24 hours):
+1. Reset ALL domain account passwords
+2. Reset krbtgt password TWICE with 10-hour gap
+   (invalidates all existing Kerberos tickets)
+3. Terminate all active sessions
+4. Force re-authentication across all systems
+5. Collect full Splunk logs and Wireshark PCAP for evidence
+
+=== PHASE 4: ERADICATION ===
+
+Remove attacker access:
+1. Identify and remove any backdoors or persistence mechanisms
+2. Check for new user accounts created by attacker
+3. Review Group Policy changes
+4. Check for scheduled tasks created during compromise
+5. Scan all systems with EDR for malware
+
+Event IDs to check for persistence:
+- Event ID 4720 — New user account created
+- Event ID 4728 — User added to security group
+- Event ID 4732 — User added to local admin group
+- Event ID 4698 — Scheduled task created
+
+=== PHASE 5: RECOVERY ===
+
+1. Restore systems from clean backups if needed
+2. Re-enable accounts after password reset confirmation
+3. Monitor closely for 72 hours post-incident
+4. Verify all IOCs are cleared
+5. Confirm normal authentication patterns restored
+
+=== PHASE 6: LESSONS LEARNED ===
+
+Technical Controls to Implement:
+1. Strong passwords (25+ chars) for all service accounts
+2. Group Managed Service Accounts (gMSA) — auto-rotating passwords
+3. AES encryption — disable RC4 for Kerberos
+4. Protected Users Security Group for privileged accounts
+5. Credential Guard on all domain systems
+6. NTLM restrictions — force Kerberos where possible
+7. Network segmentation — isolate attack platforms
+
+Detection Controls to Implement:
+1. Splunk alert on Event ID 4769 for service accounts
+2. Splunk alert on NTLM Logon Type 3 from non-domain IPs
+3. Wireshark/Zeek continuous monitoring on domain traffic
+4. Baseline normal authentication patterns
+
+=== EVIDENCE CHECKLIST ===
+[ ] Splunk logs exported
+[ ] Wireshark PCAP saved (phase4-ir-capture.pcap)
+[ ] Event IDs documented (4769, 4624, 4648, 4688)
+[ ] Timeline of attack documented
+[ ] Affected accounts listed
+[ ] MITRE ATT&CK techniques mapped
+
+=== MITRE ATT&CK REFERENCE ===
+T1558.003 — Kerberoasting
+T1003.002 — Credential Dumping (SAM)
+T1550.002 — Pass-the-Hash
+T1078 — Valid Accounts (used for initial access)
