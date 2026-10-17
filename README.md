@@ -133,6 +133,27 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 
 [📄 Full Documentation](docs/scenarios/scenario-6.txt)
 
+---
+
+### 7. Incident Response & Network Forensics
+**Objective:** Simulate a full domain compromise and conduct forensic investigation
+
+**IR Chain:**
+- Attack Simulation: Kerberoasting + Pass-the-Hash on lab.local domain
+- Splunk Analysis: Event ID 4769 (Kerberoasting) + 4624 (Pass-the-Hash)
+- Wireshark Analysis: NTLMSSP traffic capture and analysis
+- IR Report: Full incident timeline and containment steps
+- IR Playbook: Built response playbook for AD compromise
+
+**Result:** ✅ Full forensic investigation completed — 100% detection rate
+
+**Tools:** Splunk, Wireshark, impacket, crackmapexec
+
+[📄 Full Documentation](docs/scenarios/scenario-7.txt)
+[📄 IR Playbook](docs/ir-playbook.txt)
+
+---
+
 **Offensive Security:**
 - Network reconnaissance and enumeration
 - Vulnerability exploitation (Metasploit Framework)
@@ -185,6 +206,8 @@ Virtual cybersecurity lab environment designed for offensive security practice, 
 - [Scenario 4: Kerberoasting](docs/scenarios/scenario-4.txt)
 - [Scenario 5: Pass-the-Hash](docs/scenarios/scenario-5.txt)
 - [Scenario 6: SIEM Detection](docs/scenarios/scenario-6.txt)
+- [Scenario 7: Incident Response](docs/scenarios/scenario-7.txt)
+- [IR Playbook](docs/ir-playbook.txt)
 
 ## 🎓 Certification Preparation
 
@@ -215,6 +238,8 @@ This lab supports preparation for:
 - tcpdump
 - Splunk Enterprise (SIEM)
 - Splunk Universal Forwarder
+- impacket (secretsdump, GetUserSPNs)
+- crackmapexec
 
 **Infrastructure:**
 - VMware Workstation Pro 17.6.4
@@ -223,16 +248,15 @@ This lab supports preparation for:
 ## 📊 Statistics
 
 - **VMs Deployed:** 7
-- **Scenarios Completed:** 6
+- **Scenarios Completed:** 7
 - **Systems Compromised:** 2/2 targets (100%)
-- **Screenshots:** 37
-- **Documentation Pages:** 7
-- **PCAP Files:** 1
+- **Screenshots:** 57
+- **Documentation Pages:** 9
+- **PCAP Files:** 2
 
 ## 🚀 Future Enhancements
 
 - [ ] Additional attack scenarios (privilege escalation, persistence)
-- [ ] Blue team exercises (incident response, forensics)
 - [ ] Automated attack scripts
 
 ## 📝 License
