@@ -2,7 +2,7 @@
 
 A complete virtual penetration testing lab built from scratch for hands-on security training and certification preparation.
 
-![Lab Architecture](screenshots/lab-setup/18-final-lab-architecture.png)
+![Lab Architecture](screenshots/01-lab-setup/15-final-lab-architecture.png)
 
 ## 📋 Overview
 
