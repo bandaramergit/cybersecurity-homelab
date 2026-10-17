@@ -1,1 +1,80 @@
+=== Scenario 7: Incident Response & Network Forensics ===
+Date: 2026-10-16
+Analyst: Bandar Amer
+Severity: CRITICAL
 
+=== INCIDENT SUMMARY ===
+A full domain compromise was detected in the lab.local Active Directory environment.
+The attacker executed Kerberoasting to extract and crack service account credentials,
+followed by credential dumping and Pass-the-Hash to achieve full Domain Administrator access.
+
+=== ATTACK TIMELINE ===
+
+14:15 — Kerberoasting Attack
+- Source: 192.168.161.128 (Kali Linux)
+- Action: impacket-GetUserSPNs requested Kerberos ticket for sqlsvc
+- Evidence: Event ID 4769 on DC01 — Administrator@LAB.LOCAL requested sqlsvc ticket
+- Result: TGS ticket extracted and saved for offline cracking
+
+14:21 — Credential Dumping (secretsdump)
+- Source: 192.168.161.128 (Kali Linux)
+- Action: impacket-secretsdump dumped all domain NTLM hashes
+- Evidence: Event ID 4624 (Logon Type 3, NTLM) + ANONYMOUS LOGON from 192.168.161.128
+- Result: All domain hashes exposed including Administrator hash
+
+14:25 — Pass-the-Hash Attack
+- Source: 192.168.161.128 (Kali Linux)
+- Action: crackmapexec authenticated using Administrator NTLM hash
+- Evidence: Event ID 4624 — Administrator login from 192.168.161.128, no Workstation_Name
+- Result: Pwn3d! — Full domain compromise achieved
+
+=== FORENSIC EVIDENCE ===
+
+Splunk Analysis:
+- Event ID 4769: Administrator@LAB.LOCAL requested sqlsvc ticket from 192.168.161.128
+- Event ID 4624: Multiple NTLM Logon Type 3 from 192.168.161.128 without Workstation_Name
+- Event ID 4648: Explicit credential use detected
+
+Wireshark Analysis:
+- NTLMSSP_NEGOTIATE from 192.168.161.128 to 192.168.161.10 (DC01)
+- NTLMSSP_CHALLENGE response from DC01
+- NTLMSSP_AUTH — User: lab.local\Administrator authenticated via hash
+- PCAP File: phase4-ir-capture.pcap
+
+=== AFFECTED SYSTEMS ===
+- DC01 (192.168.161.10) — Domain Controller — FULLY COMPROMISED
+- All domain accounts — Hashes exposed
+- sqlsvc — Password cracked offline
+
+=== ROOT CAUSE ===
+1. Weak service account password on sqlsvc (crackable with rockyou.txt)
+2. NTLM authentication enabled — allows Pass-the-Hash
+3. No alerting on unusual Kerberos ticket requests
+4. No monitoring on NTLM logons from non-domain IPs
+
+=== CONTAINMENT STEPS ===
+1. Isolate 192.168.161.128 from network immediately
+2. Reset ALL domain account passwords
+3. Reset krbtgt password TWICE (invalidates all Kerberos tickets)
+4. Terminate all active sessions for compromised accounts
+5. Force re-authentication across all domain systems
+
+=== REMEDIATION RECOMMENDATIONS ===
+1. Implement strong passwords (25+ chars) for all service accounts
+2. Use Group Managed Service Accounts (gMSA) for sqlsvc
+3. Enable AES encryption — disable RC4 for service accounts
+4. Enable Protected Users Security Group
+5. Enable Credential Guard on all domain systems
+6. Disable NTLM where possible — force Kerberos
+7. Monitor Event ID 4769 for unusual service ticket requests
+8. Alert on NTLM Logon Type 3 from non-domain IP addresses
+
+=== MITRE ATT&CK MAPPING ===
+- T1558.003 — Kerberoasting (Credential Access)
+- T1003.002 — Security Account Manager (Credential Dumping)
+- T1550.002 — Pass-the-Hash (Lateral Movement)
+
+=== STATUS ===
+Detection: SUCCESS
+Containment: SIMULATED (Lab Environment)
+Evidence Collected: Splunk logs + Wireshark PCAP
