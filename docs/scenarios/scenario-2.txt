@@ -14,7 +14,9 @@ Attack Platform:
 - Tools: nmap, enum4linux, smbclient, crackmapexec
 
 Phase 1: Service Discovery
-[نكمل هنا]
+- Port Scanning: nmap identified SMB ports (139, 445) open on all three Windows clients
+- Service Enumeration: enum4linux revealed workgroup info and share names
+- Screenshot: 11
 
 Phase 2: SMB Exploitation
 - Accessed share: //192.168.161.130/Share
