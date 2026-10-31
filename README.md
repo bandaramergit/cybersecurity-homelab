@@ -260,7 +260,11 @@ This lab supports preparation for:
 - **Systems Compromised:** 2/2 targets (100%)
 - **Screenshots:** 57
 - **Documentation Pages:** 9
-- **PCAP Files:** 2
+- **PCAP Files:** 1
+
+## 📦 Evidence Files
+
+- [phase4-ir-capture.pcapng](captures/phase4-ir-capture.pcapng) — Phase 4 Incident Response network capture
 
 ## 🚀 Project Status
 
