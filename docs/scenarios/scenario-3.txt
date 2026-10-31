@@ -8,8 +8,10 @@ Setup:
 - Scenario: Re-exploit Metasploitable while capturing
 
 Phase 1: Traffic Capture Setup
-[نكمل هنا]
-
+- Started Wireshark capture on eth0 interface
+- Applied filter: host 192.168.161.129
+- Re-executed vsftpd exploit while capturing live traffic
+- Screenshot: 13
 
 Phase 2: Traffic Analysis
 - Total Packets Captured: [عدد الـ packets]
