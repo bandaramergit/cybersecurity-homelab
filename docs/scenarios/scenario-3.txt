@@ -14,7 +14,7 @@ Phase 1: Traffic Capture Setup
 - Screenshot: 13
 
 Phase 2: Traffic Analysis
-- Total Packets Captured: [عدد الـ packets]
+- Total Packets Captured: [847]
 - FTP Traffic: Identified vsftpd communication
 - Backdoor Connection: Port 6200 detected
 - Attack Signatures Found:
