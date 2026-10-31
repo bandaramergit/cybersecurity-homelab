@@ -39,7 +39,7 @@ Wireshark Analysis:
 - NTLMSSP_NEGOTIATE from 192.168.161.128 to 192.168.161.10 (DC01)
 - NTLMSSP_CHALLENGE response from DC01
 - NTLMSSP_AUTH — User: lab.local\Administrator authenticated via hash
-- PCAP File: phase4-ir-capture.pcap
+- PCAP File: phase4-ir-capture.pcapng
 
 === AFFECTED SYSTEMS ===
 - DC01 (192.168.161.10) — Domain Controller — FULLY COMPROMISED
