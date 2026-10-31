@@ -15,26 +15,14 @@ Attack Platform:
 Phase 1: Reconnaissance
 - Command: nmap -sV 192.168.161.129
 - Result: Identified vsftpd 2.3.4 on port 21 (known vulnerable)
-
-Phase 2: Exploitation
-- Exploit: exploit/unix/ftp/vsftpd_234_backdoor
-- Target: 192.168.161.129:21
-- Result: ✅ Command shell session opened
-- Screenshot: 04-exploitation-success.png
-
-"Phase 1: Reconnaissance":
-- Network scan completed
-- All targets online and reachable
-- Metasploitable confirmed at 192.168.161.129
+- Network scan completed, all targets online and reachable
 - Screenshot: 01-network-discovery.png
 
-
 Phase 2: Exploitation
 - Exploit: exploit/unix/ftp/vsftpd_234_backdoor
 - Target: 192.168.161.129:21
 - Result: ✅ Command shell session opened
 - Screenshot: 04-exploitation-success.png
-
 
 Phase 3: Post-Exploitation
 - Access Level: root (UID 0)
@@ -44,7 +32,6 @@ Phase 3: Post-Exploitation
   • User enumeration (/etc/passwd)
   • File system explored
 - Screenshots: 05, 06
-
 
 === Summary ===
 Status: ✅ SUCCESS
@@ -64,4 +51,3 @@ Recommendations:
 - Implement intrusion detection
 - Monitor FTP service logs
 - Disable unnecessary services
-
